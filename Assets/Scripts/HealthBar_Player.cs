@@ -6,15 +6,20 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    [SerializeField] private GameObject showDmg;
+    [SerializeField] private Transform container;
+
+    
     // Start is called before the first frame update
     public float health;
     float maxHealth=100;
     public Image healthBar;
     float lerpSpeed;
+    
     void Start()
     {
         health=maxHealth;
-        
+        ObjectPoolManager.instance.PreCachePool(showDmg, 10);
     }
 
     // Update is called once per frame
@@ -36,6 +41,11 @@ public class HealthBar : MonoBehaviour
         {
             print("Đã nhận damage. Trừ máu");
             health -= damagePoints;
+            var obj = ObjectPoolManager.Spawn(showDmg);
+            obj.transform.SetParent(container);
+            obj.SetActive(true);
+            var script = obj.GetComponent<ShowDmg>();
+            script.Init(damagePoints, transform.position);
         }
     }
     public void Heal(float healingPoints)

@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerSkillAttack
+  - PlayerAttack
+  - Spikes
+  - Enemy
+  - EnemyAttack
+  - RoomWizard
   layers:
   - Default
   - TransparentFX
